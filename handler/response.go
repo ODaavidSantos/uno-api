@@ -33,3 +33,18 @@ type CreateSolicitanteResponse struct {
 	Message string `json:"message"`
 	Data schemas.Solicitante `json:"data"`
 }
+
+type ListSolicitanteResponse struct {
+	Message string                    `json:"message"`
+	Data    []schemas.Solicitante 		`json:"data"`
+}
+
+type ShowSolicitanteResponse struct {
+	Message string                    `json:"message"`
+	Data    schemas.Solicitante 	  `json:"data"`
+}
+
+type UpdateSolicitanteResponse struct {
+	Message string `json:"message"`
+	Data schemas.Solicitante `json:"data"`
+}

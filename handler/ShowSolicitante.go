@@ -7,6 +7,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api/v1
+
+// @Summary Show solicitante
+// @Description Show a solicitante
+// @Tags Solicitante
+// @Produce json
+// @Param cnpj query string true "Solicitante identification"
+// @Success 200 {object} ShowSolicitanteResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /solicitante [get]
 func ShowSolicitante(ctx *gin.Context) {
 	cnpj := ctx.Query("cnpj")
 

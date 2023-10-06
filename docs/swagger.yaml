@@ -30,6 +30,46 @@ definitions:
       message:
         type: string
     type: object
+  handler.ListSolicitanteResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/schemas.Solicitante'
+        type: array
+      message:
+        type: string
+    type: object
+  handler.ShowSolicitanteResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.Solicitante'
+      message:
+        type: string
+    type: object
+  handler.UpdateSolicitanteRequest:
+    properties:
+      ativo:
+        type: boolean
+      cep:
+        type: string
+      cidade:
+        type: string
+      estado:
+        type: string
+      nome_fantasia:
+        type: string
+      numero:
+        type: string
+      rua:
+        type: string
+    type: object
+  handler.UpdateSolicitanteResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.Solicitante'
+      message:
+        type: string
+    type: object
   schemas.Solicitante:
     properties:
       ativo:
@@ -53,6 +93,70 @@ info:
   contact: {}
 paths:
   /solicitante:
+    get:
+      description: Show a solicitante
+      parameters:
+      - description: Solicitante identification
+        in: query
+        name: cnpj
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ShowSolicitanteResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Show solicitante
+      tags:
+      - Solicitante
+    patch:
+      consumes:
+      - application/json
+      description: Update a solicitante data
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateSolicitanteRequest'
+      - description: Solicitante identification
+        in: query
+        name: cnpj
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.UpdateSolicitanteResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Update solicitante
+      tags:
+      - Solicitante
     post:
       consumes:
       - application/json
@@ -80,6 +184,23 @@ paths:
           schema:
             $ref: '#/definitions/handler.ErrorResponse'
       summary: Create solicitante
+      tags:
+      - Solicitante
+  /solicitantes:
+    get:
+      description: List all solicitantes
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ListSolicitanteResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: List solicitante
       tags:
       - Solicitante
 swagger: "2.0"
