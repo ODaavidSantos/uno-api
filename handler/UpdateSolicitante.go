@@ -8,7 +8,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api/v1
 
+// @Summary Update solicitante
+// @Description Update a solicitante data
+// @Tags Solicitante
+// @Accept json
+// @Produce json
+// @Param request body UpdateSolicitanteRequest true "Request body"
+// @Param cnpj query string true "Solicitante identification"
+// @Success 200 {object} UpdateSolicitanteResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 409 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /solicitante [patch]
 func UpdateSolicitante(ctx *gin.Context) {
 	request := UpdateSolicitanteRequest{}
 
