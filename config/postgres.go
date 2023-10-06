@@ -28,7 +28,7 @@ func initializePostgres() (*gorm.DB, error) {
 	}
 
 	// Migrate the schema
-	err = db.AutoMigrate(&schemas.Solicitante{})
+	err = db.AutoMigrate(&schemas.Solicitante{}, &schemas.Usuario{})
 	if err != nil {
 		logger.Errorf("postgres automigration error: %v", err)
 		return nil, err
