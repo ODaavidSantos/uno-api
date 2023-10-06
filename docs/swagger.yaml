@@ -1,4 +1,85 @@
+definitions:
+  handler.CreateSolicitanteRequest:
+    properties:
+      cep:
+        type: string
+      cidade:
+        type: string
+      cnpj:
+        type: string
+      estado:
+        type: string
+      nome_fantasia:
+        type: string
+      numero:
+        type: string
+      rua:
+        type: string
+    type: object
+  handler.CreateSolicitanteResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.Solicitante'
+      message:
+        type: string
+    type: object
+  handler.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
+  schemas.Solicitante:
+    properties:
+      ativo:
+        type: boolean
+      cep:
+        type: string
+      cidade:
+        type: string
+      cnpj:
+        type: string
+      estado:
+        type: string
+      nomeFantasia:
+        type: string
+      numero:
+        type: string
+      rua:
+        type: string
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /solicitante:
+    post:
+      consumes:
+      - application/json
+      description: Create a new solicitante
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateSolicitanteRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateSolicitanteResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Create solicitante
+      tags:
+      - Solicitante
 swagger: "2.0"

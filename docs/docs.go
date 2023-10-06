@@ -14,7 +14,133 @@ const docTemplate = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {}
+    "paths": {
+        "/solicitante": {
+            "post": {
+                "description": "Create a new solicitante",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Solicitante"
+                ],
+                "summary": "Create solicitante",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.CreateSolicitanteRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.CreateSolicitanteResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "handler.CreateSolicitanteRequest": {
+            "type": "object",
+            "properties": {
+                "cep": {
+                    "type": "string"
+                },
+                "cidade": {
+                    "type": "string"
+                },
+                "cnpj": {
+                    "type": "string"
+                },
+                "estado": {
+                    "type": "string"
+                },
+                "nome_fantasia": {
+                    "type": "string"
+                },
+                "numero": {
+                    "type": "string"
+                },
+                "rua": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.CreateSolicitanteResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/schemas.Solicitante"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error_code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "schemas.Solicitante": {
+            "type": "object",
+            "properties": {
+                "ativo": {
+                    "type": "boolean"
+                },
+                "cep": {
+                    "type": "string"
+                },
+                "cidade": {
+                    "type": "string"
+                },
+                "cnpj": {
+                    "type": "string"
+                },
+                "estado": {
+                    "type": "string"
+                },
+                "nomeFantasia": {
+                    "type": "string"
+                },
+                "numero": {
+                    "type": "string"
+                },
+                "rua": {
+                    "type": "string"
+                }
+            }
+        }
+    }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
