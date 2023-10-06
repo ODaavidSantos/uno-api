@@ -1,14 +1,7 @@
 package schemas
 
-import (
-	"time"
-
-	"gorm.io/gorm"
-)
-
 type Solicitante struct {
-	gorm.Model
-	Cnpj string `gorm:"unique;size:14"`
+	Cnpj string `gorm:"primaryKey;unique;size:14"`
 	NomeFantasia string `gorm:"unique"`
 	Ativo bool `gorm:"default:true"`
 	Cep string `gorm:"size:8"`
@@ -19,10 +12,6 @@ type Solicitante struct {
 }
 
 type SolicitanteResponse struct {
-	ID        		uint      	`json:"id"`
-	CreatedAt 		time.Time 	`json:"created_at"`
-	UpdatedAt 		time.Time 	`json:"updated_at"`
-	DeletedAt 		time.Time 	`json:"deteledAt,omitempty"`
 	Cnpj 	  		string 		`json:"cnpj"`
 	NomeFantasia 	string 		`json:"nome_fantasia"`
 	Ativo 			bool 		`json:"ativo"`
