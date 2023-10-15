@@ -6,19 +6,10 @@ import (
 	"github.com/DaviidSantos/uno-api/schemas"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-
-	"github.com/joho/godotenv"
 )
 
 func initializePostgres() (*gorm.DB, error) {
 	logger := GetLogger("postgres")
-
-	// Load enviroment variables
-	err := godotenv.Load(".env")
-	if err != nil {
-		logger.Errorf("dotenv load error: %v", err)
-		return nil, err
-	}
 
 	// Connect to database
 	db, err := gorm.Open(postgres.Open(os.Getenv("DB")), &gorm.Config{})
